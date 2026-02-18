@@ -29,7 +29,7 @@ from typing import Optional
 from dotenv import load_dotenv
 
 # Caminho para a biblioteca
-SDK_PATH = "./lib/XCloudSDK-v1.0.0-Linux-x86_64/package_shared/lib/x86_64/Release/libXCloudSDK.so"
+SDK_PATH = "./lib/libXCloudSDK.so"
 
 # Tipos de callback
 PXSDK_MessageCallBack = ctypes.CFUNCTYPE(
