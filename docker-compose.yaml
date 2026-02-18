@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+
+  redis:
+    image: redis:7
+    container_name: redis_edge
+    restart: always
+    command: redis-server --appendonly yes --appendfsync everysec
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  producer:
+    build: .
+    container_name: event_producer
+    command: python services/producer_service.py
+    privileged: true  # necessário para GPIO
+    devices:
+      - /dev/gpiomem
+    depends_on:
+      - redis
+    restart: always
+
+  worker_download:
+    build: .
+    container_name: worker_download
+    command: rq worker download_queue
+    volumes:
+      - videos_data:/videos
+
+    depends_on:
+      - redis
+    restart: always
+
+  worker_upload:
+    build: .
+    container_name: worker_upload
+    command: rq worker upload_queue
+    volumes:
+      - videos_data:/videos
+    depends_on:
+      - redis
+    restart: always
+
+volumes:
+  redis_data:
+  videos_data:

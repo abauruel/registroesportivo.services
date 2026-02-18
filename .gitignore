@@ -1,0 +1,105 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+env.bak/
+venv.bak/
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+log/
+npm-debug.log*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.cover
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS files
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*~
+
+# Node (if applicable)
+node_modules/
+package-lock.json
+
+# Local configuration
+local_eketkey.txt
+eketfo.txt
+
+# IDE specific
+*.iml
+.gradle
+out/
+.classpath
+.factorypath
+
+# OS-specific
+.AppleDouble
+.LSOverride
+._*
+
+# Project specific
+videos/
+.mypy_cache/
+.dmypy.json
+dmypy.json

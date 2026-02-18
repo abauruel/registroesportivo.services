@@ -1,0 +1,5 @@
+redis
+rq
+requests
+RPi.GPIO
+Flask
