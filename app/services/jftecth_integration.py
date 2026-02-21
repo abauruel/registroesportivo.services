@@ -28,8 +28,9 @@ from datetime import datetime
 from typing import Optional
 from dotenv import load_dotenv
 
-# Caminho para a biblioteca
-SDK_PATH = "./lib/libXCloudSDK.so"
+# Caminho para a biblioteca (com fallback robusto)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SDK_PATH = os.getenv("SDK_PATH", os.path.join(BASE_DIR, "lib", "libXCloudSDK.so"))
 
 # Tipos de callback
 PXSDK_MessageCallBack = ctypes.CFUNCTYPE(
@@ -79,7 +80,14 @@ class XCloudSDK:
 
     def __init__(self, sdk_path: str = SDK_PATH):
         """Inicializa o SDK"""
-        self.sdk = ctypes.CDLL(sdk_path)
+        resolved_sdk_path = os.path.abspath(sdk_path)
+        if not os.path.exists(resolved_sdk_path):
+            raise FileNotFoundError(
+                f"Biblioteca SDK não encontrada em: {resolved_sdk_path}. "
+                f"Defina SDK_PATH ou verifique /app/lib/libXCloudSDK.so"
+            )
+
+        self.sdk = ctypes.CDLL(resolved_sdk_path)
         self.h_user = 0
         self.login_handle = 0
         self.is_logged_in = False

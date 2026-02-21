@@ -11,6 +11,7 @@ services:
 
   producer:
     build: .
+    image: registroesportivoservices-app:latest
     container_name: event_producer
     command: python services/producer_service.py
     ports:
@@ -31,7 +32,7 @@ services:
     restart: always
 
   worker_download:
-    build: .
+    image: registroesportivoservices-app:latest
     container_name: worker_download
     command: rq worker download_queue
     environment:
@@ -50,7 +51,7 @@ services:
     restart: always
 
   worker_upload:
-    build: .
+    image: registroesportivoservices-app:latest
     container_name: worker_upload
     command: rq worker upload_queue
     environment:
