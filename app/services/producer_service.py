@@ -37,7 +37,7 @@ API_PORT = 5000
 
 def trigger_event(channel):
     """Dispara evento de download (usado pelo GPIO)"""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = now_timestamp()
     
     print(f"\n{'='*60}")
     print(f"📥 Evento GPIO detectado - Canal {channel}")

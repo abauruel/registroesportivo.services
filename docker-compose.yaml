@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-
   redis:
     image: redis:7
     container_name: redis_edge
@@ -16,7 +13,17 @@ services:
     build: .
     container_name: event_producer
     command: python services/producer_service.py
-    privileged: true  # necessário para GPIO
+    ports:
+      - "5001:5000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - APP_TIMEZONE=${APP_TIMEZONE:-America/Sao_Paulo}
+      - NVR_IP=${NVR_IP}
+      - NVR_PORT=${NVR_PORT}
+      - NVR_USERNAME=${NVR_USERNAME}
+      - NVR_PASSWORD=${NVR_PASSWORD}
+    privileged: true # necessário para GPIO
     devices:
       - /dev/gpiomem
     depends_on:
@@ -27,6 +34,14 @@ services:
     build: .
     container_name: worker_download
     command: rq worker download_queue
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - APP_TIMEZONE=${APP_TIMEZONE:-America/Sao_Paulo}
+      - NVR_IP=${NVR_IP}
+      - NVR_PORT=${NVR_PORT}
+      - NVR_USERNAME=${NVR_USERNAME}
+      - NVR_PASSWORD=${NVR_PASSWORD}
     volumes:
       - videos_data:/videos
 
@@ -38,6 +53,9 @@ services:
     build: .
     container_name: worker_upload
     command: rq worker upload_queue
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     volumes:
       - videos_data:/videos
     depends_on:

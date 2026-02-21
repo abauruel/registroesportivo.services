@@ -352,6 +352,13 @@ class XCloudSDK:
                 if self.is_logged_in:
                     print(f"ℹ️  Dispositivo tem 16 canais (0-15)")
                     break
+            if not self.is_logged_in:
+                print(f"✗ Login no NVR não foi concluído para {device_id}")
+                print("  Possíveis causas:")
+                print("    • Usuário/senha inválidos")
+                print("    • Porta/protocolo do NVR incorretos")
+                print("    • Usuário sem permissão para acesso remoto")
+                print("  Verifique NVR_IP, NVR_PORT, NVR_USERNAME e NVR_PASSWORD")
             return self.is_logged_in
         else:
             print(f"✗ Falha ao iniciar login: {result}")

@@ -13,7 +13,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from config import REDIS_HOST, REDIS_PORT, DOWNLOAD_QUEUE
+from config import REDIS_HOST, REDIS_PORT, DOWNLOAD_QUEUE, now_timestamp
 
 # Setup Flask
 app = Flask(__name__)
@@ -37,7 +37,7 @@ def trigger_event_api(channel, timestamp=None, source="API"):
     """
     # Se timestamp não fornecido, usa hora atual
     if timestamp is None:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = now_timestamp()
     
     # Valida formato do timestamp
     try:

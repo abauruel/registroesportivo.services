@@ -66,6 +66,16 @@ NVR_USERNAME=service
 NVR_PASSWORD=sua_senha
 ```
 
+Ou use o template:
+```bash
+cp .env.example .env
+```
+
+Para subir com Podman Compose:
+```bash
+podman compose up -d --build
+```
+
 ## Dependências
 
 ```bash
